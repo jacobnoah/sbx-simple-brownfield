@@ -1,0 +1,35 @@
+<Project>
+
+  <!--
+    Build settings shared by every project. SHARED FILE - read-only for feature
+    agents. See AGENTS.md.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Correctness gate">
+    <!--
+      Compiler and analyzer warnings are errors: `dotnet build` is the
+      correctness half of the gate, the way `tsc` was in the TypeScript
+      blueprint. Code *style* is not enforced here - that is
+      `dotnet format`'s job, driven by .editorconfig.
+    -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Reproducibility">
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
+
+</Project>

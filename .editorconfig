@@ -1,0 +1,129 @@
+# EditorConfig drives `dotnet format`, which is the style half of the gate.
+# SHARED FILE - read-only for feature agents. See AGENTS.md.
+#
+# Severity guide:
+#   warning  -> enforced; `dotnet format --verify-no-changes` fails on it
+#   suggestion / silent -> IDE hint only, not enforced
+#   none     -> off
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.{cs,csx}]
+indent_size = 4
+
+[*.{csproj,props,targets,slnx,xml}]
+indent_size = 2
+
+[*.{json,yml,yaml,md}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.cs]
+
+#### Formatting ####
+
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_between_query_expression_clauses = true
+
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
+
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_around_binary_operators = before_and_after
+
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
+
+#### Enforced style ####
+
+# Braces are never optional. Prevents a whole class of merge accident.
+csharp_prefer_braces = true:warning
+dotnet_diagnostic.IDE0011.severity = warning
+
+# `using` directives outside the namespace, sorted, no unused ones.
+csharp_using_directive_placement = outside_namespace:warning
+dotnet_diagnostic.IDE0065.severity = warning
+dotnet_diagnostic.IDE0005.severity = warning
+
+# File-scoped namespaces everywhere.
+csharp_style_namespace_declarations = file_scoped:warning
+dotnet_diagnostic.IDE0161.severity = warning
+
+# `var` only when the type is on the right-hand side.
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:suggestion
+
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+dotnet_style_readonly_field = true:warning
+dotnet_diagnostic.IDE0044.severity = warning
+
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning
+dotnet_diagnostic.IDE0040.severity = warning
+
+#### Deliberately not enforced ####
+
+# Unused parameters: RegisterFeatures(IEndpointRouteBuilder app) ships with an
+# empty body on purpose, and feature handlers legitimately ignore arguments.
+dotnet_code_quality_unused_parameters = all:silent
+dotnet_diagnostic.IDE0060.severity = none
+
+# Expression-bodied members are a matter of taste here.
+dotnet_diagnostic.IDE0022.severity = suggestion
+dotnet_diagnostic.IDE0023.severity = suggestion
+dotnet_diagnostic.IDE0025.severity = suggestion
+dotnet_diagnostic.IDE0027.severity = suggestion
+
+# `var` preferences stay suggestions, so format does not churn agent code.
+dotnet_diagnostic.IDE0007.severity = suggestion
+dotnet_diagnostic.IDE0008.severity = suggestion
+
+#### Analyzer tuning ####
+
+# CA1515 wants public types in an executable made internal. The shared contracts
+# are public on purpose - features and tests consume them, and public reads
+# better in a blueprint people are meant to copy.
+dotnet_diagnostic.CA1515.severity = none
+
+# CA1848 wants a compiled LoggerMessage delegate for every log call. Correct for
+# a hot path, pure friction for feature code.
+dotnet_diagnostic.CA1848.severity = none
+
+# CA1031 (do not catch general exceptions) fights the shared exception handler,
+# which exists precisely to catch everything.
+dotnet_diagnostic.CA1031.severity = none
+
+[tests/**/*.cs]
+# Underscored test method names are idiomatic; xUnit discovers by attribute, so
+# CA1707 and "unused" test classes are noise here.
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1812.severity = none
+
+# xUnit's own convention is that a [CollectionDefinition] class ends in
+# "Collection", which is exactly what CA1711 objects to.
+dotnet_diagnostic.CA1711.severity = none

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "feature",
+    "color": "0e8a16",
+    "description": "A new user-facing capability"
+  },
+  {
+    "name": "bug",
+    "color": "d73a4a",
+    "description": "Existing behaviour is wrong"
+  },
+  {
+    "name": "area:tasks",
+    "color": "1d76db",
+    "description": "The implemented Tasks feature"
+  },
+  {
+    "name": "area:lists",
+    "color": "5319e7",
+    "description": "The implemented Lists feature"
+  },
+  {
+    "name": "area:due",
+    "color": "fbca04",
+    "description": "Due-date reporting feature"
+  },
+  {
+    "name": "area:comments",
+    "color": "d93f0b",
+    "description": "Task comments feature"
+  },
+  {
+    "name": "area:bulk",
+    "color": "006b75",
+    "description": "Bulk task operations feature"
+  }
+]

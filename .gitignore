@@ -1,0 +1,35 @@
+# Build output
+.bin/
+bin/
+obj/
+artifacts/
+[Dd]ebug/
+[Rr]elease/
+publish/
+*.binlog
+node_modules/
+
+# Test + coverage
+TestResults/
+coverage/
+*.coverage
+*.trx
+
+# User / IDE
+*.user
+*.suo
+.vs/
+.vscode/
+.idea/
+*.DotSettings.user
+
+# Local secrets and env
+*.env
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+
+# OS
+.DS_Store
+Thumbs.db

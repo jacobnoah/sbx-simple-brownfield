@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- SHARED FILE - read-only for feature agents. See AGENTS.md. -->
+
+  <PropertyGroup>
+    <RootNamespace>Taskboard.Api.Tests</RootNamespace>
+    <AssemblyName>Taskboard.Api.Tests</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Taskboard.Api/Taskboard.Api.csproj" />
+  </ItemGroup>
+
+</Project>

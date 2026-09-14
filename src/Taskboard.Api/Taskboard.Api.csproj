@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- SHARED FILE - read-only for feature agents. See AGENTS.md. -->
+
+  <PropertyGroup>
+    <RootNamespace>Taskboard.Api</RootNamespace>
+    <AssemblyName>Taskboard.Api</AssemblyName>
+    <UserSecretsId>taskboard-api-blueprint</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Scalar.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Taskboard.Api.Tests" />
+  </ItemGroup>
+
+</Project>

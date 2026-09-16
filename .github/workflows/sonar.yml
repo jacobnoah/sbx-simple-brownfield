@@ -1,0 +1,88 @@
+name: sonar
+
+# Runs on every pull request, whatever it targets. The branch filter is
+# deliberately absent: CFD stacks pull requests, so a PR's base is often another
+# agent/* branch rather than main, and a `branches: [main]` filter would skip
+# every stacked PR silently.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  sonar:
+    name: sonar
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Sonar needs real history to assign blame and to work out what is
+          # "new code" on a pull request.
+          fetch-depth: 0
+
+      # The SonarScanner for .NET is a Java program, whatever the project is.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Cache SonarQube Cloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Install the scanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: Restore
+        run: dotnet restore Taskboard.slnx --locked-mode
+
+      # begin -> build -> end. The build has to sit between the two, because the
+      # scanner reads the compiler output; `dotnet build` alone is not enough to
+      # produce analysis, and a cached/incremental build produces nothing at all,
+      # which is why --no-incremental is here.
+      - name: Analyse
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet sonarscanner begin \
+            /k:"jacobnoah_sbx-simple-brownfield" \
+            /o:"jacobnoah" \
+            /d:sonar.token="${SONAR_TOKEN}" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.scanner.scanAll=false
+          dotnet build Taskboard.slnx --no-incremental --no-restore
+          dotnet sonarscanner end /d:sonar.token="${SONAR_TOKEN}"
+
+  # The correctness gate, independent of Sonar so a Sonar outage cannot hide a
+  # broken build. Warnings are errors here (Directory.Build.props), so this is
+  # also where an over-complex method fails if CA1502 is ever switched on.
+  build:
+    name: build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - run: dotnet restore Taskboard.slnx --locked-mode
+
+      - run: dotnet test Taskboard.slnx
+
+      - run: dotnet format Taskboard.slnx --verify-no-changes

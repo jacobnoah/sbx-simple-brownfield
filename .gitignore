@@ -33,3 +33,16 @@ appsettings.Local.json
 # OS
 .DS_Store
 Thumbs.db
+
+# ATK managed assets
+.claude/agents/
+.claude/hooks/
+.claude/rules/
+.claude/skills/
+.mcp.json
+.atk-lock.json.lock
+.atkrc.json
+
+# CFD state and unit worktrees (never committed)
+.rpi/
+worktrees/

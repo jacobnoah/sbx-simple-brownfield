@@ -1,0 +1,170 @@
+{
+  "assets": [
+    {
+      "bundleOrigin": {
+        "name": "cfd",
+        "version": "1.0.0"
+      },
+      "dependencies": [],
+      "description": "Shared rules for Contract-First Development: how to talk to the developer, the fixed category and branch layout, foundation-owned dependencies, and Git safety. Loaded by the cfd-* skills, not run on its own.",
+      "entrypoint": "SKILL.md",
+      "files": [
+        {
+          "checksum": "31765121d7515a12471db56a6a0d547f764fa709d9a63c378ac364c79fd7de5d",
+          "installedPath": ".claude/skills/cfd-common/SKILL.md",
+          "sourcePath": "SKILL.md"
+        },
+        {
+          "checksum": "9cdcbcfecd17678ddb17b7448443b85e064f7ce7042c9056d6d907b19129eed6",
+          "installedPath": ".claude/skills/cfd-common/assets/config.yaml",
+          "sourcePath": "assets/config.yaml"
+        },
+        {
+          "checksum": "7a829ebd6c96b84b43fb99e1f87a986f1b93cfb7c53a9ad267c1bbb4a6243a03",
+          "installedPath": ".claude/skills/cfd-common/assets/unit-notes.md",
+          "sourcePath": "assets/unit-notes.md"
+        },
+        {
+          "checksum": "a7e90672e29726c6ef0cf0e6dc2d5231a56eaf25271047d690010cd0bf80796a",
+          "installedPath": ".claude/skills/cfd-common/references/rules.md",
+          "sourcePath": "references/rules.md"
+        }
+      ],
+      "installReason": "direct",
+      "name": "cfd-common",
+      "type": "skill",
+      "version": "1.1.0"
+    },
+    {
+      "bundleOrigin": {
+        "name": "cfd",
+        "version": "1.0.0"
+      },
+      "dependencies": [
+        {
+          "name": "cfd-common",
+          "type": "skill",
+          "version": "^1.0.0"
+        }
+      ],
+      "description": "Start Contract-First Development for an Azure DevOps epic. Configures the repository on first run, turns the epic into a per-category plan and contracts, stops for human review, then installs the shared dependencies and creates the branches and worktrees.",
+      "entrypoint": "SKILL.md",
+      "files": [
+        {
+          "checksum": "8d8bdbb3ed48ac897795dfbe9e014dffe96ca0c093b6034af8f8dbc3effe94d3",
+          "installedPath": ".claude/skills/cfd-setup/SKILL.md",
+          "sourcePath": "SKILL.md"
+        }
+      ],
+      "installReason": "direct",
+      "name": "cfd-setup",
+      "type": "skill",
+      "version": "1.0.0"
+    },
+    {
+      "bundleOrigin": {
+        "name": "cfd",
+        "version": "1.0.0"
+      },
+      "dependencies": [
+        {
+          "name": "cfd-common",
+          "type": "skill",
+          "version": "^1.0.0"
+        }
+      ],
+      "description": "Do the work for one Contract-First Development category in its worktree. Runs one stage per invocation - research, then plan, then implement - so each stage starts with a clean context. The plan stage picks a short, medium, or long depth that decides how much thinking implement does.",
+      "entrypoint": "SKILL.md",
+      "files": [
+        {
+          "checksum": "79d4e7a19a6701048fbc8a36fb856486a8e2cbfdf5e900118d29f0610d32294e",
+          "installedPath": ".claude/skills/cfd-work/SKILL.md",
+          "sourcePath": "SKILL.md"
+        }
+      ],
+      "installReason": "direct",
+      "name": "cfd-work",
+      "type": "skill",
+      "version": "1.1.0"
+    },
+    {
+      "bundleOrigin": {
+        "name": "cfd",
+        "version": "1.0.0"
+      },
+      "dependencies": [
+        {
+          "name": "cfd-common",
+          "type": "skill",
+          "version": "^1.0.0"
+        }
+      ],
+      "description": "Check, commit, push, and open stacked Azure DevOps PRs for Contract-First Development categories. Reviews each branch against its plan and contracts first, gives a plain-English fix list per branch, then publishes and reports the merge order.",
+      "entrypoint": "SKILL.md",
+      "files": [
+        {
+          "checksum": "74ea1d5fe43280ba400ada5e29244914ae1091a65ddc0ff73ceee56fcf95edf4",
+          "installedPath": ".claude/skills/cfd-publish/SKILL.md",
+          "sourcePath": "SKILL.md"
+        }
+      ],
+      "installReason": "direct",
+      "name": "cfd-publish",
+      "type": "skill",
+      "version": "1.1.0"
+    },
+    {
+      "bundleOrigin": {
+        "name": "cfd",
+        "version": "1.0.0"
+      },
+      "dependencies": [
+        {
+          "name": "cfd-common",
+          "type": "skill",
+          "version": "^1.0.0"
+        }
+      ],
+      "description": "Combine the finished Contract-First Development branches into one throwaway worktree, start the app, and quickly click through the main flows in Chrome to confirm they work. Never touches the real branches, so it runs while PRs are open.",
+      "entrypoint": "SKILL.md",
+      "files": [
+        {
+          "checksum": "e329ea4afe945b472750ea0bd93d9c6d365f2767419c17ea2bdbf20f746c9a88",
+          "installedPath": ".claude/skills/cfd-check/SKILL.md",
+          "sourcePath": "SKILL.md"
+        }
+      ],
+      "installReason": "direct",
+      "name": "cfd-check",
+      "type": "skill",
+      "version": "1.0.0"
+    },
+    {
+      "bundleOrigin": {
+        "name": "cfd",
+        "version": "1.0.0"
+      },
+      "dependencies": [
+        {
+          "name": "cfd-common",
+          "type": "skill",
+          "version": "^1.0.0"
+        }
+      ],
+      "description": "Show where a Contract-First Development epic stands, and repair the stacked PRs after a merge. Retargets orphaned PRs, merges the new parent into each remaining branch, resolves the mechanical conflicts, and reports what is left.",
+      "entrypoint": "SKILL.md",
+      "files": [
+        {
+          "checksum": "b746764b6c544f277c20d942de4a6d20f742ee38fff981ad479a170ee2bb7581",
+          "installedPath": ".claude/skills/cfd-sync/SKILL.md",
+          "sourcePath": "SKILL.md"
+        }
+      ],
+      "installReason": "direct",
+      "name": "cfd-sync",
+      "type": "skill",
+      "version": "1.0.0"
+    }
+  ],
+  "lockVersion": 1
+}

@@ -33,5 +33,105 @@
     "name": "area:bulk",
     "color": "006b75",
     "description": "Bulk task operations feature"
+  },
+  {
+    "name": "area:stats",
+    "color": "c2e0c6",
+    "description": "Board statistics feature"
+  },
+  {
+    "name": "area:search",
+    "color": "bfd4f2",
+    "description": "Ranked search feature"
+  },
+  {
+    "name": "area:tags",
+    "color": "f9d0c4",
+    "description": "Task tags feature"
+  },
+  {
+    "name": "area:checklist",
+    "color": "0052cc",
+    "description": "Task checklist feature"
+  },
+  {
+    "name": "area:assignees",
+    "color": "e99695",
+    "description": "Task assignees feature"
+  },
+  {
+    "name": "area:time-tracking",
+    "color": "5319e7",
+    "description": "Time tracking feature"
+  },
+  {
+    "name": "area:reminders",
+    "color": "b60205",
+    "description": "Task reminders feature"
+  },
+  {
+    "name": "area:snooze",
+    "color": "c5def5",
+    "description": "Snooze due dates feature"
+  },
+  {
+    "name": "area:dependencies",
+    "color": "d4c5f9",
+    "description": "Task dependencies feature"
+  },
+  {
+    "name": "area:recurrence",
+    "color": "0e8a16",
+    "description": "Recurring tasks feature"
+  },
+  {
+    "name": "area:export",
+    "color": "1d76db",
+    "description": "CSV/NDJSON export feature"
+  },
+  {
+    "name": "area:import",
+    "color": "fef2c0",
+    "description": "Batch import feature"
+  },
+  {
+    "name": "area:trash",
+    "color": "5c5c5c",
+    "description": "Trash and restore feature"
+  },
+  {
+    "name": "area:pins",
+    "color": "ff7619",
+    "description": "Pinned tasks feature"
+  },
+  {
+    "name": "area:views",
+    "color": "7057ff",
+    "description": "Saved views feature"
+  },
+  {
+    "name": "area:duplicate",
+    "color": "bfdadc",
+    "description": "Duplicate task feature"
+  },
+  {
+    "name": "area:calendar",
+    "color": "0075ca",
+    "description": "Calendar projection feature"
+  },
+  {
+    "name": "area:kanban",
+    "color": "008672",
+    "description": "Kanban board feature"
+  },
+  {
+    "name": "area:links",
+    "color": "a2eeef",
+    "description": "Task links feature"
+  },
+  {
+    "name": "area:focus",
+    "color": "e4e669",
+    "description": "Daily focus plan feature"
   }
 ]

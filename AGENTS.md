@@ -3,7 +3,7 @@
 Instructions for an AI agent working on one issue in this repository.
 
 This is a **brownfield** repo: the API already works. Two features are
-implemented, tested and documented, and your issue either adds a third or fixes
+implemented, tested and documented, and your issue either adds a new one or fixes
 something the existing code gets wrong.
 
 You are one of several agents working on this repo at the same time. You cannot
@@ -113,13 +113,33 @@ new `.cs` file under your folder is picked up automatically.
 Every feature is mounted under the same route group, so route space is divided up
 in advance. Your issue names the routes you own. Map those and nothing else.
 
-| Area            | Routes reserved                                                                | Status      |
-| --------------- | ------------------------------------------------------------------------------ | ----------- |
-| `area:tasks`    | `/tasks`, `/tasks/{taskId}`, `/tasks/{taskId}/complete`, `/tasks/{taskId}/reopen` | implemented |
-| `area:lists`    | `/lists`, `/lists/{listId}`, `/lists/{listId}/tasks`                             | implemented |
-| `area:due`      | `/due/tasks`, `/due/summary`                                                     | to build    |
-| `area:comments` | `/tasks/{taskId}/comments`, `/tasks/{taskId}/comments/{commentId}`               | to build    |
-| `area:bulk`     | `/bulk/tasks`                                                                    | to build    |
+| Area                 | Routes reserved                                                                                                                | Status      |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| `area:tasks`         | `/tasks`, `/tasks/{taskId}`, `/tasks/{taskId}/complete`, `/tasks/{taskId}/reopen`                                              | implemented |
+| `area:lists`         | `/lists`, `/lists/{listId}`, `/lists/{listId}/tasks`                                                                           | implemented |
+| `area:due`           | `/due/tasks`, `/due/summary`                                                                                                   | to build    |
+| `area:comments`      | `/tasks/{taskId}/comments`, `/tasks/{taskId}/comments/{commentId}`                                                             | to build    |
+| `area:bulk`          | `/bulk/tasks`                                                                                                                  | to build    |
+| `area:stats`         | `/stats/board`, `/stats/lists/{listId}`                                                                                        | to build    |
+| `area:search`        | `/search`                                                                                                                      | to build    |
+| `area:tags`          | `/tasks/{taskId}/tags`, `/tasks/{taskId}/tags/{tag}`, `/tags`, `/tags/{tag}/tasks`                                             | to build    |
+| `area:checklist`     | `/tasks/{taskId}/checklist`, `/tasks/{taskId}/checklist/{itemId}`                                                              | to build    |
+| `area:assignees`     | `/tasks/{taskId}/assignee`, `/assignees`, `/assignees/{assignee}/tasks`                                                        | to build    |
+| `area:time-tracking` | `/tasks/{taskId}/time-entries`, `/tasks/{taskId}/time-entries/{entryId}`, `/time-tracking/summary`                             | to build    |
+| `area:reminders`     | `/tasks/{taskId}/reminders`, `/tasks/{taskId}/reminders/{reminderId}`, `/reminders/due`, `/reminders/{reminderId}/acknowledge` | to build    |
+| `area:snooze`        | `/tasks/{taskId}/snooze`, `/snooze/overdue`                                                                                    | to build    |
+| `area:dependencies`  | `/tasks/{taskId}/dependencies`, `/tasks/{taskId}/dependencies/{dependsOnId}`                                                   | to build    |
+| `area:recurrence`    | `/tasks/{taskId}/recurrence`, `/tasks/{taskId}/recurrence/next`                                                                | to build    |
+| `area:export`        | `/export/tasks`, `/export/lists`                                                                                               | to build    |
+| `area:import`        | `/import/tasks`                                                                                                                | to build    |
+| `area:trash`         | `/trash`, `/trash/{taskId}`, `/trash/{taskId}/restore`                                                                         | to build    |
+| `area:pins`          | `/pins`, `/pins/{taskId}`                                                                                                      | to build    |
+| `area:views`         | `/views`, `/views/{viewId}`, `/views/{viewId}/tasks`                                                                           | to build    |
+| `area:duplicate`     | `/tasks/{taskId}/duplicate`                                                                                                    | to build    |
+| `area:calendar`      | `/calendar`                                                                                                                    | to build    |
+| `area:kanban`        | `/kanban`, `/kanban/tasks/{taskId}/move`                                                                                       | to build    |
+| `area:links`         | `/tasks/{taskId}/links`, `/tasks/{taskId}/links/{linkId}`, `/links`                                                            | to build    |
+| `area:focus`         | `/focus`, `/focus/suggestions`                                                                                                 | to build    |
 
 Two rules follow, and breaking either one breaks somebody else's feature rather
 than your own:

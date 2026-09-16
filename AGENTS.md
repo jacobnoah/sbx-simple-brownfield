@@ -461,11 +461,28 @@ deleting it is not a fix.
 
 ## 7. Workflow
 
-1. Branch from the default branch: `agent/<area>/<slug>`, for example
-   `agent/due/upcoming-endpoint` or `agent/tasks/due-sort-nulls`.
-2. Commit in small steps. Every commit message references the issue number, e.g.
-   `fix(tasks): sort undated tasks last (#4)`.
-3. Before every commit and before opening the PR, both of these must pass:
+Work is organised by **layer** - `infra`, `db`, `api`, `fe` - and each issue's
+`area:*` label decides its layer. Every issue for one layer is worked together as a
+**batch**: one worktree (`worktrees/<layer>`), one branch, one session, one pull
+request. Batches on different layers run in parallel, in their own worktrees.
+
+1. Do not pick your own branch or base. The `cfd-*` skills cut them, and you work on
+   the branch already checked out in your layer's worktree. It is named
+   `agent/<layer>/<issues>`, the batch's issue numbers ascending and joined by `-`,
+   for example `agent/api/1-2-3-4-5`. Its base is the branch of the nearest
+   unmerged batch below it in foundation order (`infra`, `db`, `api`, `fe`), or
+   the default branch when there is none.
+2. Work the batch's issues one after another, in the order you were given: an
+   issue that waits for another comes after it, then bugs in existing features
+   before new features, then issue number. Finish one issue before starting the
+   next. Rule 1 still applies per issue: being in the same batch never lets one
+   issue edit another issue's folders.
+3. Commit in small steps. **Every commit belongs to exactly one issue** and its
+   message references that issue's number, e.g.
+   `fix(tasks): sort undated tasks last (#4)`. Never mix two issues' files in one
+   commit.
+4. Before every commit, after finishing each issue, and before the PR is opened,
+   both of these must pass:
 
    ```sh
    dotnet test Taskboard.slnx
@@ -473,11 +490,16 @@ deleting it is not a fix.
    ```
 
    Fix your own code until they pass. Do not fix them by editing a shared file,
-   suppressing an analyzer, adding a package, or skipping a test.
-4. Open a pull request against the default branch. Describe what you built or
-   fixed, the exact routes you added, and - separately and prominently - anything
-   you were blocked on by rules 2 or 3.
-5. **Do not merge.** A human reviews and merges.
+   suppressing an analyzer, adding a package, or skipping a test. A failure caused
+   by an earlier issue in the batch is fixed in that issue's folders.
+5. One pull request per batch, opened by `/cfd-publish`. It targets the batch's
+   base, so pull requests **stack in foundation order**: a layer's PR targets the
+   branch of the layer below it, and the lowest targets the default branch. A
+   batch is never published before the batch below it. The description has one
+   `Closes #n` line per issue, a section per issue saying what was built or fixed
+   and the exact routes added, and - separately and prominently - anything any
+   issue was blocked on by rules 2 or 3.
+6. **Do not merge.** A human reviews and merges, bottom of the stack first.
 
 ## 8. Stop conditions
 
